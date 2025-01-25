@@ -5,6 +5,27 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+const Best = ({votes, anecdotes}) => {
+  const maxValue = Math.max(...votes);
+  const best = votes.indexOf(maxValue);
+  if (maxValue === 0) {
+    return (
+      <div>
+        <h1>Anecdote with most votes</h1>
+        <p>No votes yet.</p>
+      </div>
+    );
+  } else {
+  return (
+    <div>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[best]}</p>
+      <p>has {votes[best]} votes</p>
+    </div>
+  )
+}
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -25,7 +46,7 @@ const App = () => {
   };
 
   const voteTheAnecdote = () => {
-    const newVotes = { ...votes };
+    const newVotes = [...votes];
     newVotes[selected] += 1;
     setVotes(newVotes);
   };
@@ -36,6 +57,9 @@ const App = () => {
       <p>has {votes[selected]} votes</p>
       <button onClick={voteTheAnecdote}>vote</button>
       <button onClick={handleNextAnecdote}>next anecdote</button>
+      <Best
+      anecdotes={anecdotes}
+      votes={votes} />
     </div>
   )
 }

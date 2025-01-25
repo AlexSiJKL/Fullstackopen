@@ -3,7 +3,7 @@
     - 05 done
     - 06 done
 - part1
-    - anecdotes
+    - anecdotes done
     - courseinfo done
     - introdemo done
     - unicafe  done
