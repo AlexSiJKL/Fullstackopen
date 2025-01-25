@@ -2,3 +2,8 @@
     - 04 done
     - 05 done
     - 06 done
+- part1
+    - anecdotes
+    - courseinfo done
+    - introdemo done
+    - unicafe  done
