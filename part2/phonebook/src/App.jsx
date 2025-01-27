@@ -46,9 +46,17 @@ const App = () => {
       number: newPhone,
     };
 
-    setPersons(persons.concat(newPerson));
-    setNewName("");
-    setNewPhone("");
+    // Send a POST request to the server
+    axios
+      .post("http://localhost:3001/persons", newPerson)
+      .then(response => {
+        setPersons(persons.concat(response.data)); // Update state with the new person
+        setNewName("");
+        setNewPhone("");
+      })
+      .catch(error => {
+        console.error("Error adding person:", error);
+      });
   };
 
   return (
