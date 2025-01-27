@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import axios from "axios";
+import PersonList from "./components/PersonList";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -8,7 +9,7 @@ const App = () => {
   const [newPhone, setNewPhone] = useState("");
   const [filter, setFilter] = useState("");
 
-    // Fetch data from the server
+  // Fetch data from the server
   useEffect(() => {
     axios
       .get("http://localhost:3001/persons")
@@ -72,18 +73,16 @@ const App = () => {
         addPerson={addPerson}
       />
       <h3>Numbers</h3>
-      <Persons persons={persons} filter={filter} />
+      <PersonList persons={persons} filter={filter} />
     </div>
   );
 };
 
 const Filter = ({ filter, handleFilterChange }) => {
   return (
-    <form onChange={handleFilterChange}>
-      <div>
-        filter shown with <input value={filter} onChange={handleFilterChange} />
-      </div>
-    </form>
+    <div>
+      filter shown with <input value={filter} onChange={handleFilterChange} />
+    </div>
   );
 };
 
@@ -106,26 +105,6 @@ const PersonForm = ({
         <button type="submit">add</button>
       </div>
     </form>
-  );
-};
-
-const Persons = ({ persons, filter }) => {
-  return (
-    <>
-      {persons.map((person) =>
-        !filter || person.name.toLowerCase().includes(filter.toLowerCase()) ? (
-          <Person key={person.id} person={person} />
-        ) : null
-      )}
-    </>
-  );
-};
-
-const Person = ({ person }) => {
-  return (
-    <p>
-      {person.name}: {person.number}
-    </p>
   );
 };
 
