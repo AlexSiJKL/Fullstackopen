@@ -1,16 +1,24 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { id: 1, name: "Arto Hellas", phone: "040-123456" },
-    { id: 2, name: "Ada Lovelace", phone: "39-44-5323523" },
-    { id: 3, name: "Dan Abramov", phone: "39-44-5323523" },
-    { id: 4, name: "Mary Poppendieck", phone: "39-23-6423122" },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [filter, setFilter] = useState("");
+
+    // Fetch data from the server
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/persons")
+      .then(response => {
+        setPersons(response.data); // assuming response.data contains the array of persons
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
@@ -35,7 +43,7 @@ const App = () => {
     const newPerson = {
       id: persons.length + 1,
       name: newName,
-      phone: newPhone,
+      number: newPhone,
     };
 
     setPersons(persons.concat(newPerson));
@@ -108,7 +116,7 @@ const Persons = ({ persons, filter }) => {
 const Person = ({ person }) => {
   return (
     <p>
-      {person.name}: {person.phone}
+      {person.name}: {person.number}
     </p>
   );
 };
