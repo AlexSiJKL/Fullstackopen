@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-
 import Filter from "./Filter";
 import PersonForm from "./PersonForm";
 import PersonList from "./PersonList";
+import Notification from "./Notification";
 
 const Phonebook = ({
   filter,
@@ -14,12 +14,14 @@ const Phonebook = ({
   addPerson,
   persons,
   deletePerson,
+  errorMessage,
 }) => {
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
+      <Notification message={errorMessage} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
-      <h3>Add a new</h3>
+      <h2>Add a new</h2>
       <PersonForm
         newName={newName}
         newPhone={newPhone}
@@ -27,7 +29,7 @@ const Phonebook = ({
         handlePhoneChange={handlePhoneChange}
         addPerson={addPerson}
       />
-      <h3>Numbers</h3>
+      <h2>Numbers</h2>
       <PersonList persons={persons} filter={filter} deletePerson={deletePerson} />
     </div>
   );

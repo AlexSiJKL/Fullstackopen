@@ -2,12 +2,14 @@
 import { useState, useEffect } from "react";
 import numbersService from "./services/numbers";
 import Phonebook from "./components/Phonebook";
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [filter, setFilter] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null)
 
   // Fetch data from the server
   useEffect(() => {
@@ -54,9 +56,17 @@ const App = () => {
             setPersons(persons.map((person) => (person.id !== existingPerson.id ? person : returnedPerson)));
             setNewName("");
             setNewPhone("");
+            setErrorMessage(`Updated ${newName}'s number to ${newPhone}`);
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 5000);
           })
           .catch((error) => {
             console.error("Error updating person:", error);
+            setErrorMessage("Error updating person.");
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 5000);
           });
       }
     } else {
@@ -72,9 +82,17 @@ const App = () => {
           setPersons(persons.concat(returnedPerson));
           setNewName("");
           setNewPhone("");
+          setErrorMessage(`Added ${newName} to phonebook.`);
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
         })
         .catch((error) => {
           console.error("Error adding person:", error);
+          setErrorMessage("Error adding person.");
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
         });
     }
   };
@@ -88,9 +106,17 @@ const App = () => {
           setPersons((prevPersons) =>
             prevPersons.filter((person) => person.id !== id)
           );
+          setErrorMessage("Person deleted successfully."); // Set success message
+          setTimeout(() => {
+            setErrorMessage(null); // Clear the message after 5 seconds
+          }, 5000);
         })
         .catch((error) => {
           console.error("Error deleting person:", error);
+          setErrorMessage("Error deleting person.");
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
         });
     }
   };
@@ -106,6 +132,7 @@ const App = () => {
       addPerson={addPerson}
       persons={persons}
       deletePerson={deletePerson}
+      errorMessage={errorMessage}
     />
   );
 };
