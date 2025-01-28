@@ -1,18 +1,8 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": "1"
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": "2"
-    },
-    {
       "name": "Dan Abramov",
-      "number": "12-43-234345",
+      "number": "12-33-2222222",
       "id": "3"
     },
     {
@@ -24,6 +14,16 @@
       "id": 5,
       "name": "John Smith",
       "number": "099-555-3328311"
+    },
+    {
+      "id": "30be",
+      "name": "Ivan Drago",
+      "number": "+7 999 999-99-99"
+    },
+    {
+      "id": "dc4d",
+      "name": "Billy Bob",
+      "number": "046-222-22-22"
     }
   ]
 }
