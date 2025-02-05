@@ -15,11 +15,13 @@ const Phonebook = ({
   persons,
   deletePerson,
   errorMessage,
+  successMessage,
 }) => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={errorMessage} />
+      <Notification message={successMessage} type="success" />
+      <Notification message={errorMessage} type="error" />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h2>Add a new</h2>
       <PersonForm

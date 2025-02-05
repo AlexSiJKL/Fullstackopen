@@ -9,6 +9,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [filter, setFilter] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
   // Fetch data from the server
@@ -56,12 +57,13 @@ const App = () => {
             setPersons(persons.map((person) => (person.id !== existingPerson.id ? person : returnedPerson)));
             setNewName("");
             setNewPhone("");
-            setErrorMessage(`Updated ${newName}'s number to ${newPhone}`);
+            setSuccessMessage(`Updated ${newName}'s number to ${newPhone}`);
             setTimeout(() => {
-              setErrorMessage(null);
+              setSuccessMessage(null);
             }, 5000);
           })
           .catch((error) => {
+            if (error.response && error.e)
             console.error("Error updating person:", error);
             setErrorMessage("Error updating person.");
             setTimeout(() => {
@@ -82,9 +84,9 @@ const App = () => {
           setPersons(persons.concat(returnedPerson));
           setNewName("");
           setNewPhone("");
-          setErrorMessage(`Added ${newName} to phonebook.`);
+          setSuccessMessage(`Added ${newName} to phonebook.`);
           setTimeout(() => {
-            setErrorMessage(null);
+            setSuccessMessage(null);
           }, 5000);
         })
         .catch((error) => {
@@ -106,9 +108,9 @@ const App = () => {
           setPersons((prevPersons) =>
             prevPersons.filter((person) => person.id !== id)
           );
-          setErrorMessage("Person deleted successfully."); // Set success message
+          setSuccessMessage("Person deleted successfully."); // Set success message
           setTimeout(() => {
-            setErrorMessage(null); // Clear the message after 5 seconds
+            setSuccessMessage(null); // Clear the message after 5 seconds
           }, 5000);
         })
         .catch((error) => {
@@ -133,6 +135,7 @@ const App = () => {
       persons={persons}
       deletePerson={deletePerson}
       errorMessage={errorMessage}
+      successMessage={successMessage}
     />
   );
 };

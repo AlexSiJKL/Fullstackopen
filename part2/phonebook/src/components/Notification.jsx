@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 
-const Notification = ({ message }) => {
+const Notification = ({ message, type }) => {
     if (message === null) {
       return null
     }
   
     return (
-      <div className='error'>
+      <div className={type === 'success' ? 'success' : 'error'}>
         {message}
       </div>
     )
