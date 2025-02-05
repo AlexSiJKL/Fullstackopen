@@ -7,3 +7,7 @@
     - courseinfo done
     - introdemo done
     - unicafe  done
+- part2
+    - courseinfo done
+    - phonebook done
+    - countries
